@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema id="CreditAgreements"
-           xmlns="urn:PriceComparisonStandardsGroup/20160505/CreditAgreements"
-           xmlns:c="urn:PriceComparisonStandardsGroup/20160505/CreditAgreements"
-           xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="urn:PriceComparisonStandardsGroup/20160505/CreditAgreements"
-           elementFormDefault="qualified">
+<xs:schema id="CreditAgreements" xmlns="urn:PriceComparisonStandardsGroup/20160505/CreditAgreements" xmlns:c="urn:PriceComparisonStandardsGroup/20160505/CreditAgreements" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:PriceComparisonStandardsGroup/20160505/CreditAgreements" elementFormDefault="qualified">
   <xs:element name="CreditAgreements" type="c:CreditAgreements">
     <xs:annotation>
       <xs:documentation>Denotes a list of possible credit agreements</xs:documentation>
@@ -17,7 +12,7 @@
           <xs:documentation xml:lang="en">Denotes a Credit Agreements Tier to be selected based on the total cost of the pinciple insurance premuim PLUS that of costs of the selected financeable add-on</xs:documentation>
         </xs:annotation>
       </xs:element>
-    </xs:sequence>  
+    </xs:sequence>
   </xs:complexType>
   <xs:complexType name="Tier">
     <xs:sequence>
@@ -96,8 +91,8 @@
       <xs:extension base="Amount">
         <xs:attribute name="Min" use="optional" type="c:nonNegativeDecimal">
           <xs:annotation>
-          <xs:documentation>Denotes the min deposit amount</xs:documentation>
-        </xs:annotation>
+            <xs:documentation>Denotes the min deposit amount</xs:documentation>
+          </xs:annotation>
         </xs:attribute>
       </xs:extension>
     </xs:complexContent>
@@ -122,7 +117,25 @@
       </xs:element>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="Charge">
+  <xs:complexType name="SetupFee">
+    <xs:complexContent>
+      <xs:extension base="c:Charge">
+        <xs:annotation>
+          <xs:documentation xml:lang="en"> It is a fee for taking out finance but the provider wants the fee paid up front.</xs:documentation>
+        </xs:annotation>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="FinanceFee">
+    <xs:complexContent>
+      <xs:extension base="c:Charge">
+        <xs:annotation>
+          <xs:documentation xml:lang="en"> It is a fee for taking out finance but the provider wants the fee paid up front.</xs:documentation>
+        </xs:annotation>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Charge" abstract="true">
     <xs:sequence>
       <xs:element name="Amount" type="c:Amount">
         <xs:annotation>
@@ -130,26 +143,7 @@
         </xs:annotation>
       </xs:element>
     </xs:sequence>
-    <xs:attribute name="Name" type="c:chargeType" use="required">
-      <xs:annotation>
-        <xs:documentation>Denotes the reason for the charge</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name="AddToLoan" type="xs:boolean" use="required">
-      <xs:annotation>
-        <xs:documentation>Denotes if the charge can be added to the load or must be payed in full with the deposit</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
   </xs:complexType>
-  <xs:simpleType name="chargeType">
-    <xs:restriction base="xs:token">
-      <xs:enumeration value="SetupFee">
-        <xs:annotation>
-          <xs:documentation xml:lang="en">Denotes a fee a credit provider may apply to set up a credit agreement</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
   <xs:simpleType name="term">
     <xs:annotation>
       <xs:documentation xml:lang="en">loan term in months</xs:documentation>
